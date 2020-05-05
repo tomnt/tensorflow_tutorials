@@ -1,5 +1,7 @@
 # tensorflow_tutorials
+
 ```
+# How to run.
 git clone https://github.com/tomnt/tensorflow_tutorials.git
 cd tensorflow_tutorials
 python3 -m venv venv
