@@ -5,13 +5,11 @@
  https://www.tensorflow.org/tutorials/keras/classification
 """
 from __future__ import absolute_import, division, print_function, unicode_literals
-# TensorFlow と tf.keras のインポート
-###################################
+# TensorFlow と tf.keras のインポート / TensorFlow and tf.keras
 import tensorflow as tf
 from tensorflow import keras
 
-# ヘルパーライブラリのインポート
-###########################
+# ヘルパーライブラリのインポート / Helper libraries
 import numpy as np
 import matplotlib.pyplot as plt
 print('tf.__version__: ', tf.__version__)
