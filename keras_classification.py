@@ -14,8 +14,8 @@ from tensorflow import keras
 # ヘルパーライブラリのインポート / Helper libraries
 import numpy as np
 import matplotlib.pyplot as plt
-
 print('tf.__version__: ', tf.__version__)
+
 
 """
  ファッションMNISTデータセットのロード
@@ -54,6 +54,7 @@ for i in range(25):
     plt.xlabel(class_names[train_labels[i]])
 plt.show()
 
+
 """
  Build the model
  モデルの構築 / Set up the layers
@@ -73,12 +74,14 @@ model.compile(optimizer='adam',
 # モデルの訓練 / Train the model
 model.fit(train_images, train_labels, epochs=5)
 
+
 """
  正解率の評価
  Evaluate accuracy
 """
 test_loss, test_acc = model.evaluate(test_images, test_labels, verbose=2)
 print('\nTest accuracy:', test_acc)
+
 
 """
  予測する
