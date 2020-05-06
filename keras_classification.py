@@ -33,16 +33,16 @@ print('test_labels :', len(test_labels), test_labels.tolist())
  データの前処理
  Preprocess the data
 """
-# 単一画像の表示
+# 単一画像の表示 / Show a single image
 # print(train_images[0].tolist())  # Print image as list of integers
-plt.figure()
+plt.figure('A single image')
 plt.imshow(train_images[0])
 plt.colorbar()
 plt.grid(False)
 plt.show()
 
 # 訓練用データセットの最初の25枚の画像を、クラス名付きで表示 / Display the first 25 images from the training set and display the class name
-plt.figure(figsize=(10, 10))
+plt.figure('First 25 images from the training set and display the class name',figsize=(10, 10))
 for i in range(25):
     plt.subplot(5, 5, i + 1)
     plt.xticks([])
@@ -118,9 +118,9 @@ def plot_value_array(i, predictions_array, true_label):
     thisplot[predicted_label].set_color('red')
     thisplot[true_label].set_color('blue')
 
-
-i = 12
-plt.figure(figsize=(6, 3))
+# 0番目の画像と、予測、予測配列を見てみましょう。/ Let's look at the 0th image, predictions, and prediction array.
+i = 0
+plt.figure(str(i)+'th image, predictions, and prediction array', figsize=(6, 3))
 plt.subplot(1, 2, 1)
 plot_image(i, predictions, test_labels, test_images)
 plt.subplot(1, 2, 2)
@@ -132,7 +132,7 @@ plt.show()
 num_rows = 5
 num_cols = 3
 num_images = num_rows * num_cols
-plt.figure(figsize=(2 * 2 * num_cols, 2 * num_rows))
+plt.figure('Plot the first X test images, their predicted labels, and the true labels.', figsize=(2 * 2 * num_cols, 2 * num_rows))
 for i in range(num_images):
     plt.subplot(num_rows, 2 * num_cols, 2 * i + 1)
     plot_image(i, predictions, test_labels, test_images)
