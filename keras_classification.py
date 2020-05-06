@@ -30,6 +30,7 @@ class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
  Preprocess the data
 """
 # 単一画像の表示
+# print(train_images[0].tolist())  # Print image as list of integers
 plt.figure()
 plt.imshow(train_images[0])
 plt.colorbar()
@@ -59,7 +60,7 @@ model = keras.Sequential([
     keras.layers.Dense(10, activation='softmax')
 ])
 
-# モデルのコンパイル/ Compile the model
+# モデルのコンパイル / Compile the model
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
