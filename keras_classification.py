@@ -12,8 +12,8 @@ from tensorflow import keras
 # ヘルパーライブラリのインポート / Helper libraries
 import numpy as np
 import matplotlib.pyplot as plt
-print('tf.__version__: ', tf.__version__)
 
+print('tf.__version__: ', tf.__version__)
 
 """
  ファッションMNISTデータセットのロード
@@ -21,8 +21,12 @@ print('tf.__version__: ', tf.__version__)
 """
 fashion_mnist = keras.datasets.fashion_mnist
 (train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
-class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
-               'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
+class_names = ['0:T-shirt/top', '1:Trouser**', '2:Pullover**', '3:Drss', '4:Coat',
+               '5:Sandal', '6:Shirt', '7:Sneaker', '8:Bag', '9:Ankle bot']
+print('len(train_images):', len(train_images))
+print('len(test_labels) :', len(test_labels))
+print('train_labels:', len(train_labels), train_labels.tolist())
+print('test_labels :', len(test_labels), test_labels.tolist())
 
 
 """
@@ -48,7 +52,6 @@ for i in range(25):
     plt.xlabel(class_names[train_labels[i]])
 plt.show()
 
-
 """
  Build the model
  モデルの構築 / Set up the layers
@@ -68,14 +71,12 @@ model.compile(optimizer='adam',
 # モデルの訓練 / Train the model
 model.fit(train_images, train_labels, epochs=5)
 
-
 """
  正解率の評価
  Evaluate accuracy
 """
 test_loss, test_acc = model.evaluate(test_images, test_labels, verbose=2)
 print('\nTest accuracy:', test_acc)
-
 
 """
  予測する
