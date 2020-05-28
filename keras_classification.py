@@ -14,8 +14,25 @@ from tensorflow import keras
 # ヘルパーライブラリのインポート / Helper libraries
 import numpy as np
 import matplotlib.pyplot as plt
-print('tf.__version__: ', tf.__version__)
 
+
+def print_coordinates(image_coordinates: np.ndarray):
+    """
+    Print given image coordinates
+    @:param: numpy.ndarray image_coordinates: Image coordinates to print
+    """
+    for raw in image_coordinates.tolist():
+        column_no = 0
+        print('[', end='')
+        for depth in raw:
+            if column_no < len(raw) - 1:
+                print(str(depth).rjust(3), end=' ')
+            else:
+                print(str(depth).rjust(3) + ']')
+            column_no += 1
+
+
+print('tf.__version__: ', tf.__version__)
 
 """
  ファッションMNISTデータセットのロード
@@ -30,13 +47,15 @@ print('len(test_labels) :', len(test_labels))
 print('train_labels:', len(train_labels), train_labels.tolist())
 print('test_labels :', len(test_labels), test_labels.tolist())
 
-
 """
  データの前処理
  Preprocess the data
 """
 # 単一画像の表示 / Show a single image
-# print(train_images[0].tolist())  # Print image as list of integers
+print('train_images[0].tolist()', train_images[0].tolist())  # Print image as list of integers
+
+print_coordinates(train_images[0])
+
 plt.figure('A single image')
 plt.imshow(train_images[0])
 plt.colorbar()
@@ -44,7 +63,7 @@ plt.grid(False)
 plt.show()
 
 # 訓練用データセットの最初の25枚の画像を、クラス名付きで表示 / Display the first 25 images from the training set and display the class name
-plt.figure('First 25 images from the training set and display the class name',figsize=(10, 10))
+plt.figure('First 25 images from the training set and display the class name', figsize=(10, 10))
 for i in range(25):
     plt.subplot(5, 5, i + 1)
     plt.xticks([])
@@ -53,7 +72,6 @@ for i in range(25):
     plt.imshow(train_images[i], cmap=plt.cm.binary)
     plt.xlabel(class_names[train_labels[i]])
 plt.show()
-
 
 """
  Build the model
@@ -74,14 +92,12 @@ model.compile(optimizer='adam',
 # モデルの訓練 / Train the model
 model.fit(train_images, train_labels, epochs=5)
 
-
 """
  正解率の評価
  Evaluate accuracy
 """
 test_loss, test_acc = model.evaluate(test_images, test_labels, verbose=2)
 print('\nTest accuracy:', test_acc)
-
 
 """
  予測する
@@ -123,9 +139,10 @@ def plot_value_array(i, predictions_array, true_label):
     thisplot[predicted_label].set_color('red')
     thisplot[true_label].set_color('blue')
 
+
 # 0番目の画像と、予測、予測配列を見てみましょう。/ Let's look at the 0th image, predictions, and prediction array.
 i = 0
-plt.figure(str(i)+'th image, predictions, and prediction array', figsize=(6, 3))
+plt.figure(str(i) + 'th image, predictions, and prediction array', figsize=(6, 3))
 plt.subplot(1, 2, 1)
 plot_image(i, predictions, test_labels, test_images)
 plt.subplot(1, 2, 2)
@@ -137,7 +154,8 @@ plt.show()
 num_rows = 5
 num_cols = 3
 num_images = num_rows * num_cols
-plt.figure('Plot the first X test images, their predicted labels, and the true labels.', figsize=(2 * 2 * num_cols, 2 * num_rows))
+plt.figure('Plot the first X test images, their predicted labels, and the true labels.',
+           figsize=(2 * 2 * num_cols, 2 * num_rows))
 for i in range(num_images):
     plt.subplot(num_rows, 2 * num_cols, 2 * i + 1)
     plot_image(i, predictions, test_labels, test_images)
